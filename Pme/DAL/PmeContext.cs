@@ -1,6 +1,7 @@
 ﻿using Pme.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Pme.DAL
 {
@@ -25,6 +26,11 @@ namespace Pme.DAL
             }
 
             SaveChanges();
+        }
+
+        public IEnumerable<PmeDetail> GetAll()
+        {
+            return PmeDetails.ToList();
         }
     }
 }

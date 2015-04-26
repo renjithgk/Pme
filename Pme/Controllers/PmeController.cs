@@ -11,7 +11,9 @@ namespace Pme.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            DAL.PmeContext context = new DAL.PmeContext();
+            var model = context.GetAll();
+            return View(model);
         }
 
         [HttpPost]
@@ -67,7 +69,7 @@ namespace Pme.Controllers
             DAL.PmeContext context = new DAL.PmeContext();
             context.Save(pme, pmeDetails);
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
