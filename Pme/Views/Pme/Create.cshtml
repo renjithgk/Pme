@@ -4,11 +4,17 @@
     ViewBag.Title = "Pme Create";
 }
 
-<br/>
+<br />
 
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+
+<link href="~/Content/bootstrap.css" rel="stylesheet">
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
 
 @using(Html.BeginForm("Create","Pme", FormMethod.Post, new { id="form1", enctype="multipart/form-data" }))
 {
@@ -28,7 +34,42 @@
         </div>
     </div>
 
-
-    <br/>
+    <br />
 
 }
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#AppMapPackageId").focusout(function () {
+            var appId = $("#AppMapPackageId").val();
+            if (appId.length > 0) {
+                $.ajax(
+                    {
+                        async: false,
+                        type: "POST",
+                        url: '@Url.Action("GetDetailsByAppMapId", "Pme")',
+                        data: { 'appMapId': appId },
+                        success: function (data) {
+                            displayData(data);
+                        },
+                        error: function () {
+                            alert("Oops, something went wrong, please refresh the page and try again!");
+                        },
+                    });
+            }
+        })
+
+    });
+
+   function displayData(response) {
+            if (response != null) {
+                $("#Version").val(response.Version);
+                $("#ProgrameCode").val(response.ProgrameCode);
+                $("#ProgrameVersionCode").val(response.ProgrameVersionCode);
+                $("#AppMapPackageId").val(response.AppMapPackageId);
+            }
+        };
+</script>

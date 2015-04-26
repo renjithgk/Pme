@@ -14,6 +14,20 @@ namespace Pme.Controllers
             return View();
         }
 
+        [HttpPost]
+        public JsonResult GetDetailsByAppMapId(string appMapId)
+        {
+            if (appMapId.Length > 0)
+            {
+                //Check db and retrieve data
+                return Json(new { AppMapPackageId = appMapId, Version = "MyVersion", ProgrameCode = "MyCode", ProgrameVersionCode = "MyProgrameVersionCode" });
+            }
+            else
+            {
+                return Json(new { AppMapPackageId = appMapId, Version = "Invalid", ProgrameCode = "Invalid", ProgrameVersionCode = "Invalid" });
+            }
+        }
+
         public ActionResult Create()
         {
             var viewModel = new PmeViewModel();
@@ -36,7 +50,7 @@ namespace Pme.Controllers
                 var reader = new StreamReader(item.InputStream);
                 reader.ReadLine();
                 while (!reader.EndOfStream)
-                {  
+                {
                     var pmeDetail = new PmeDetail();
                     var line = reader.ReadLine();
                     var values = line.Split(',');
@@ -45,7 +59,7 @@ namespace Pme.Controllers
                     pmeDetail.Maximum = values[2];
                     pmeDetail.Memory = values[3];
                     pmeDetail.Minimum = values[4];
-                    pmeDetail.Threshold = values[5];  
+                    pmeDetail.Threshold = values[5];
                     pmeDetails.Add(pmeDetail);
                 }
             }
