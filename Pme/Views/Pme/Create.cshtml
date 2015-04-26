@@ -1,0 +1,34 @@
+﻿@model Pme.ViewModels.PmeViewModel
+
+@{
+    ViewBag.Title = "Pme Create";
+}
+
+<br/>
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@using(Html.BeginForm("Create","Pme", FormMethod.Post, new { id="form1", enctype="multipart/form-data" }))
+{
+
+    @Html.EditorForModel()
+
+    @Html.Display("File1")
+    <input type="file" name="files" id=" file1" />
+    @Html.Display("File2")
+    <input type="file" name="files" id=" file2" />
+    @Html.Display("File3")
+    <input type="file" name="files" id=" file3" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+
+
+    <br/>
+
+}
