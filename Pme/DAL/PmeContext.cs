@@ -28,7 +28,7 @@ namespace Pme.DAL
             SaveChanges();
         }
 
-        public IEnumerable<PmeDetail> GetAll()
+        public IList<PmeDetail> GetAll()
         {
             return PmeDetails.ToList();
         }

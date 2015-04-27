@@ -1,7 +1,9 @@
 ﻿using Pme.Models;
 using Pme.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,9 +13,11 @@ namespace Pme.Controllers
     {
         public ActionResult Index()
         {
-            DAL.PmeContext context = new DAL.PmeContext();
-            var model = context.GetAll();
-            return View(model);
+            //DAL.PmeContext context = new DAL.PmeContext();
+            //var model = context.GetAll();
+            //return View(model);
+
+            return View();
         }
 
         [HttpPost]
@@ -70,6 +74,35 @@ namespace Pme.Controllers
             context.Save(pme, pmeDetails);
 
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult GetAll()
+        {
+            try
+            {
+                DAL.PmeContext context = new DAL.PmeContext();
+                var model = context.GetAll();
+
+                if (model.Any())
+                {
+                    return new JsonResult
+                    {
+                        Data = model,
+                        ContentType = "application/json",
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        MaxJsonLength = Int32.MaxValue
+                    };
+                }
+
+                const string message = "No data found.";
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                string message = e.Message;
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

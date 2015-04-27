@@ -1,5 +1,4 @@
-﻿@model List<Pme.Models.PmeDetail>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
@@ -35,24 +34,34 @@
         </tr>
     </tfoot>
 
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(i => item.PmeDetailId)</td>
-                <td>@Html.DisplayFor(i => item.Clocking)</td>
-                <td>@Html.DisplayFor(i => item.Cpu)</td>
-                <td>@Html.DisplayFor(i => item.Maximum)</td>
-                <td>@Html.DisplayFor(i => item.Minimum)</td>
-                <td>@Html.DisplayFor(i => item.Threshold)</td>
-                <td>@Html.DisplayFor(i => item.PmeId)</td>
-            </tr>
-        }
+    <tbody id="tableBody">
     </tbody>
 </table>
 
 <script type="text/javascript">
-$(document).ready(function() {
+    $(document).ready(function () 
+    {
+        $.ajax({
+            url: "/Pme/GetAll",
+            async: false,
+            type: "GET",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ($.isArray(data) && data.length > 0) {
+                    var row = "";
+                    $.each(data, function (index, item) {
+                        row += "<tr><td>" + item.PmeDetailId + "</td><td>" + item.Clocking + "</td><td>" + item.Cpu + "</td><td>" + item.Maximum + "</td><td>" + item.Minimum + "</td><td>" + item.Threshold + "</td><td>" + item.PmeId + "</td></tr>";
+                    });
+                    $("#tableBody").html(row);
+                }
+            },
+            error: function (result) {
+                alert("Oops, something went wrong...Please refresh this page.");
+            }
+        });
+
     $('#example').DataTable( {
         initComplete: function () {
             this.api().columns().every( function () {
@@ -76,6 +85,4 @@ $(document).ready(function() {
         }
     } );
 } );
-
-
 </script>

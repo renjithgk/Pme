@@ -25,7 +25,6 @@ c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\bin\System.Web.We
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\bin\System.Web.WebPages.Razor.xml
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\bin\Antlr3.Runtime.pdb
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\bin\Newtonsoft.Json.xml
-c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.csprojResolveAssemblyReference.cache
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.dll
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.pdb
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.Migrations.Initial.resources
