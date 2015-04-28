@@ -13,10 +13,6 @@ namespace Pme.Controllers
     {
         public ActionResult Index()
         {
-            //DAL.PmeContext context = new DAL.PmeContext();
-            //var model = context.GetAll();
-            //return View(model);
-
             return View();
         }
 
@@ -103,6 +99,13 @@ namespace Pme.Controllers
                 string message = e.Message;
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public FileContentResult GetFile(int id)
+        {
+            var context = new DAL.PmeContext();
+            var fileInfo = context.GetDataAsCsv(id);
+            return File(new System.Text.UTF8Encoding().GetBytes(fileInfo), "text/csv", "File" + id + ".csv");
         }
     }
 }

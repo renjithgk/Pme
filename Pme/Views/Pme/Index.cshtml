@@ -39,8 +39,7 @@
 </table>
 
 <script type="text/javascript">
-    $(document).ready(function () 
-    {
+    $(document).ready(function () {
         $.ajax({
             url: "/Pme/GetAll",
             async: false,
@@ -51,8 +50,9 @@
             success: function (data) {
                 if ($.isArray(data) && data.length > 0) {
                     var row = "";
-                    $.each(data, function (index, item) {
-                        row += "<tr><td>" + item.PmeDetailId + "</td><td>" + item.Clocking + "</td><td>" + item.Cpu + "</td><td>" + item.Maximum + "</td><td>" + item.Minimum + "</td><td>" + item.Threshold + "</td><td>" + item.PmeId + "</td></tr>";
+                    $.each(data, function (index, item)
+                    {
+                        row += '<tr onclick = GetCsvData(' +  item.PmeDetailId  + ') title="Click to download as CSV" style="cursor: pointer;"><td>' + item.PmeDetailId + "</td><td>" + item.Clocking + "</td><td>" + item.Cpu + "</td><td>" + item.Maximum + "</td><td>" + item.Minimum + "</td><td>" + item.Threshold + "</td><td>" + item.PmeId + "</td></tr>";
                     });
                     $("#tableBody").html(row);
                 }
@@ -62,27 +62,33 @@
             }
         });
 
-    $('#example').DataTable( {
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
+        $('#example').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
-} );
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+
+    function GetCsvData(id)
+    {
+        window.location.href = '@Url.Action("GetFile", "Pme")/' + id;
+    }
+
 </script>

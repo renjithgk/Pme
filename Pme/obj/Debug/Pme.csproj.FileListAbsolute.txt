@@ -30,3 +30,4 @@ c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.pdb
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.Migrations.Initial.resources
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.csproj.GenerateResource.Cache
 c:\users\renjith\documents\visual studio 2013\Projects\Pme\Pme\obj\Debug\Pme.Migrations.MissedRelationship.resources
+C:\Users\renjith\Documents\Visual Studio 2013\Projects\Pme\Pme\obj\Debug\Pme.csprojResolveAssemblyReference.cache
